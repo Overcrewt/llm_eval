@@ -29,7 +29,7 @@ Run the first script to query the model you want to test.
 ```bash
 python ask_llm.py
 ```
-You will be prompted to enter the Hugging Face URL for the `.gguf` file of the model you want to test (e.g., `https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF/blob/main/llama-2-7b-chat.Q4_K_M.gguf`).
+You will be prompted to enter the Hugging Face URL for the `.gguf` file of the model you want to test (e.g., `https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF/blob/main/llama-2-7b-chat.Q4_K_M.gguf`)
 The script will download it automatically and begin answering questions from `questions.json`.
 The responses will be saved in `answers_llm.json`. If interrupted, simply rerun it and it will resume where it left off.
 
