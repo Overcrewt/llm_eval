@@ -67,7 +67,7 @@ def main():
             response = llm.create_chat_completion(
                 messages=messages,
                 max_tokens=1024,
-                temperature=0.2
+                temperature=0
             )
             answer_text = response["choices"][0]["message"]["content"].strip()
         except Exception as e:

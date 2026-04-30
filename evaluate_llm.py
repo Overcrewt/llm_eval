@@ -81,7 +81,7 @@ def evaluate():
             print(f"Skipping {qid} because no model answer was found.")
             continue
 
-        if qid in ["Q16", "Q17", "Q18", "Q19"]:
+        if qid in ["Q16", "Q17", "Q18", "Q19", "Q26"]:
             prompt = f"""You are an expert cybersecurity evaluator.
 Your task is to evaluate an LLM's response to a code review question based on a reference answer.
 
