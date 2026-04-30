@@ -1,7 +1,21 @@
-﻿# Candidate Models
+# Candidate Models
+
+Candidate models were selected from Hugging Face using keywords such as `cybersecurity`, `security`, `pentest`, `offensive security`, `instruct`, `coder`, and `GGUF`. The list includes small models, general-purpose instruct models, coder models, and cybersecurity-focused models.
 
 | # | Model Name | Hugging Face URL | Params | Size Category | Architecture | Type | Quantization | Downloads | Last Update | Notes |
-|---|---|---|---|---|---|---|---|---|---|---|
+|---|---|---|---:|---|---|---|---|---|---|---|
 | 1 | TinyLlama-1.1B-Chat-v1.0 | https://huggingface.co/TheBloke/TinyLlama-1.1B-Chat-v1.0-GGUF/blob/main/tinyllama-1.1b-chat-v1.0.Q4_K_M.gguf | 1.1B | ≤7B | Llama | Chat / general-purpose | GGUF Q4_K_M | unknown | unknown | Small baseline model |
 | 2 | Qwen2.5-3B-Instruct | https://huggingface.co/Qwen/Qwen2.5-3B-Instruct-GGUF/blob/main/qwen2.5-3b-instruct-q4_k_m.gguf | 3B | ≤7B | Qwen | Instruct / general-purpose | GGUF Q4_K_M | unknown | unknown | Strong small instruct model |
-| 3 | Mistral-7B-Instruct-v0.3 | https://huggingface.co/bartowski/Mistral-7B-Instruct-v0.3-GGUF/blob/main/Mistral-7B-Instruct-v0.3-Q4_K_M.gguf | 7B | ≤7B / border | Mistral | Instruct / general-purpose | GGUF Q4_K_M | unknown | unknown | Medium general-purpose model |
+| 3 | Llama-3.2-3B-Instruct | https://huggingface.co/bartowski/Llama-3.2-3B-Instruct-GGUF/blob/main/Llama-3.2-3B-Instruct-Q4_K_M.gguf | 3B | ≤7B | Llama | Instruct / general-purpose | GGUF Q4_K_M | unknown | unknown | Small Llama instruct baseline |
+| 4 | Phi-3.5-mini-instruct | https://huggingface.co/bartowski/Phi-3.5-mini-instruct-GGUF/blob/main/Phi-3.5-mini-instruct-Q4_K_M.gguf | 3.8B | ≤7B | Phi | Instruct / general-purpose | GGUF Q4_K_M | unknown | unknown | Strong small Phi instruct model |
+| 5 | Phi-4-mini-instruct | https://huggingface.co/bartowski/microsoft_Phi-4-mini-instruct-GGUF/blob/main/microsoft_Phi-4-mini-instruct-Q4_K_M.gguf | 3.8B | ≤7B | Phi | Instruct / general-purpose | GGUF Q4_K_M | unknown | unknown | Attempted but skipped because it failed to load with the CUDA backend |
+| 6 | Mistral-7B-Instruct-v0.3 | https://huggingface.co/bartowski/Mistral-7B-Instruct-v0.3-GGUF/blob/main/Mistral-7B-Instruct-v0.3-Q4_K_M.gguf | 7B | 7B–13B | Mistral | Instruct / general-purpose | GGUF Q4_K_M | unknown | unknown | Strong 7B general-purpose baseline |
+| 7 | Qwen2.5-7B-Instruct | https://huggingface.co/bartowski/Qwen2.5-7B-Instruct-GGUF/blob/main/Qwen2.5-7B-Instruct-Q4_K_M.gguf | 7B | 7B–13B | Qwen | Instruct / general-purpose | GGUF Q4_K_M | unknown | unknown | Medium Qwen instruct model |
+| 8 | Qwen2.5-Coder-7B-Instruct | https://huggingface.co/bartowski/Qwen2.5-Coder-7B-Instruct-GGUF/blob/main/Qwen2.5-Coder-7B-Instruct-Q4_K_M.gguf | 7B | 7B–13B | Qwen | Coder / Instruct | GGUF Q4_K_M | unknown | unknown | Code-focused model for code review and practical scripting tasks |
+| 9 | WhiteRabbitNeo-2.5-Qwen-2.5-Coder-7B | https://huggingface.co/bartowski/WhiteRabbitNeo-2.5-Qwen-2.5-Coder-7B-GGUF/blob/main/WhiteRabbitNeo-2.5-Qwen-2.5-Coder-7B-Q4_K_M.gguf | 7B | 7B–13B | Qwen | Cybersecurity / Coder / Instruct | GGUF Q4_K_M | unknown | unknown | Cybersecurity-oriented coder model |
+| 10 | Lily-Cybersecurity-7B-v0.2 | https://huggingface.co/segolilylabs/Lily-Cybersecurity-7B-v0.2-GGUF/blob/main/Lily-Cybersecurity-7B-v0.2.Q4_K_M.gguf | 7B | 7B–13B | Mistral / Llama-compatible | Cybersecurity fine-tune | GGUF Q4_K_M | unknown | unknown | Cybersecurity-focused 7B model |
+| 11 | SenecaLLM_x_Qwen2.5-7B-CyberSecurity | https://huggingface.co/AlicanKiraz0/SenecaLLM_x_Qwen2.5-7B-CyberSecurity-Q4_K_M-GGUF/blob/main/senecallm_x_qwen2.5-7b-cybersecurity-q4_k_m.gguf | 7B | 7B–13B | Qwen | Cybersecurity fine-tune | GGUF Q4_K_M | unknown | unknown | Cybersecurity-focused Qwen model |
+| 12 | Gemma-2-9B-it | https://huggingface.co/bartowski/gemma-2-9b-it-GGUF/blob/main/gemma-2-9b-it-Q4_K_M.gguf | 9B | 7B–13B | Gemma | Instruct / general-purpose | GGUF Q4_K_M | unknown | unknown | Medium general-purpose instruct model |
+| 13 | Mistral-Nemo-Instruct-2407 | https://huggingface.co/bartowski/Mistral-Nemo-Instruct-2407-GGUF/blob/main/Mistral-Nemo-Instruct-2407-Q4_K_M.gguf | 12B | 7B–13B | Mistral-Nemo | Instruct / general-purpose | GGUF Q4_K_M | unknown | unknown | Largest tested model and best overall baseline result |
+
+Note: exact download counts and last-update dates were not recorded during the local benchmark run and are therefore marked as `unknown`. The model URLs and quantization formats are recorded to keep the evaluation reproducible.

@@ -5,6 +5,10 @@ from huggingface_hub import hf_hub_download
 from llama_cpp import Llama
 from tqdm import tqdm
 
+# 1.0 0.5
+
+TEMPERATURE = 0
+
 def download_model_from_url(url):
     # Example: https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF/blob/main/llama-2-7b-chat.Q4_K_M.gguf
     match = re.search(r"huggingface\.co/([^/]+/[^/]+)/(?:blob|resolve)/[^/]+/(.+)", url)
@@ -67,7 +71,7 @@ def main():
             response = llm.create_chat_completion(
                 messages=messages,
                 max_tokens=1024,
-                temperature=0
+                temperature=TEMPERATURE
             )
             answer_text = response["choices"][0]["message"]["content"].strip()
         except Exception as e:
@@ -76,7 +80,7 @@ def main():
             response = llm(
                 prompt,
                 max_tokens=1024,
-                temperature=0.2,
+                temperature=TEMPERATURE,
                 stop=["User:", "System:"]
             )
             answer_text = response["choices"][0]["text"].strip()

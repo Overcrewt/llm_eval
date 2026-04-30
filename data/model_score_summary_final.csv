@@ -1,0 +1,13 @@
+Model,Normal,Trap,Overall,Factual,Practical,CodeReviewTrap,HallucinationTrap,Custom,Decision
+Mistral-Nemo-Instruct-2407,4.43,3.78,4.36,4.33,4.71,5.0,2.25,4.46,Finalist
+Qwen2.5-Coder-7B-Instruct,4.13,3.67,4.08,4.05,4.54,5.0,2.0,3.92,Finalist
+Mistral-7B-Instruct-v0.3,4.14,3.33,4.05,4.14,4.38,4.8,1.5,3.96,Comparison / not finalist
+WhiteRabbitNeo-2.5-Qwen-2.5-Coder-7B,4.1,3.56,4.04,3.95,4.17,4.8,2.0,3.73,Comparison / not finalist
+Phi-3.5-mini-instruct,3.99,4.22,4.01,4.14,3.79,5.0,3.25,4.0,Finalist
+SenecaLLM_x_Qwen2.5-7B-CyberSecurity,4.04,3.67,4.0,4.0,4.5,4.8,2.25,4.12,Comparison / not finalist
+Qwen2.5-3B-Instruct,3.96,4.22,3.99,4.14,3.83,4.8,3.5,3.58,Finalist
+Qwen2.5-7B-Instruct,3.99,4.0,3.99,4.0,3.79,5.0,2.75,3.96,Comparison / not finalist
+Gemma-2-9B-it,3.96,4.11,3.97,4.14,3.75,5.0,3.0,3.54,Comparison / not finalist
+Lily-Cybersecurity-7B-v0.2,4.06,3.0,3.94,4.1,4.17,4.6,1.0,3.85,Rejected / not finalist
+Llama-3.2-3B-Instruct,3.89,4.22,3.93,4.1,3.95,5.0,3.25,3.65,Comparison / not finalist
+TinyLlama-1.1B-Chat-v1.0,3.12,1.89,2.97,3.48,2.5,2.6,1.0,2.77,Rejected baseline
