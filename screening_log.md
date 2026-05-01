@@ -1,387 +1,295 @@
 # Screening Log
 
-The screening phase was used to compare candidate local LLMs before selecting finalists for temperature experiments and final analysis. The screening focused on factual knowledge, practical command quality, code-review traps, hallucination traps, and custom web-security tasks.
+## Screening Methodology
 
-Scores come from the automated evaluator output in `report.md`. The decision is not based only on the overall average. It also considers model category, hardware cost, code-review usefulness, hallucination resistance, and whether the model adds a useful comparison point.
+The screening phase was used to compare candidate models and decide which models should be selected as finalists.
 
-## Finalist selection
+The screening considered:
 
-Finalists selected for parameter experiments:
+- factual cybersecurity accuracy
+- completeness of explanations
+- practical command and code usability
+- code review trap performance
+- hallucination trap resistance
+- refusal behavior
+- hardware feasibility
 
-1. `Qwen2.5-3B-Instruct`
-2. `Phi-3.5-mini-instruct`
-3. `Qwen2.5-Coder-7B-Instruct`
-4. `Mistral-Nemo-Instruct-2407`
+The same general question set was used across models. The evaluation included factual questions, practical security tasks, sensitive/offensive security questions, code review traps, hallucination traps, and custom web application security questions.
 
-This satisfies the requirement of at least four finalists with at least two models from the `≤7B` category and at least two models from the `7B–13B` category.
+Models were accepted as finalists if they performed strongly and contributed useful comparison value across model size or model type.
 
-## Gemma-2-9B-it
-
-Status: Tested  
-Size category: 7B–13B  
-Type: General-purpose instruct model  
-
-Score summary:
-- Normal score average: 3.96
-- Trap score average: 4.11
-- Overall average: 3.97
-- Factual subset average: 4.14
-- Practical subset average: 3.75
-- Code-review trap average: 5.0
-- Hallucination trap average: 3.0
-
-Observations:
-- Factual knowledge: Strong. This was judged from TCP, encryption, CVSS, IDS/IPS, TLS 1.3, threat terminology, and pentest methodology questions.
-- Practical command quality: Medium to strong. This was judged from nmap, SUID search, Wireshark filters, scripting, web-security payloads, command injection, and XXE tasks.
-- Code review trap performance: Very strong. This measured whether the model found deeper issues rather than only obvious vulnerabilities.
-- Hallucination trap performance: Medium. This measured whether the model resisted fake CVEs and fictional attack names.
-- Custom cybersecurity task performance: Medium to strong. This covered XSS, SQL injection, mass assignment, SSRF, CSRF/SSRF, command injection, IDOR, and XXE questions.
-
-Decision: Comparison / not finalist
-
-Reason:
-Good general-purpose model, but not selected because it did not outperform Mistral-Nemo and did not add a unique capability.
+Models were rejected if they produced too many incorrect practical answers, failed hallucination traps, performed worse than similar models, or were not useful enough compared to stronger candidates.
 
 ---
 
-## Lily-Cybersecurity-7B-v0.2
+## Model Screening Decisions
 
-Status: Tested  
-Size category: 7B–13B  
-Type: Cybersecurity fine-tune  
+### TinyLlama-1.1B-Chat-v1.0
 
-Score summary:
-- Normal score average: 4.06
-- Trap score average: 3.0
-- Overall average: 3.94
-- Factual subset average: 4.1
-- Practical subset average: 4.17
-- Code-review trap average: 4.6
-- Hallucination trap average: 1.0
+**Status:** Rejected  
+**Size:** 1.1B  
+**Type:** General chat baseline  
 
-Observations:
-- Factual knowledge: Strong. This was judged from TCP, encryption, CVSS, IDS/IPS, TLS 1.3, threat terminology, and pentest methodology questions.
-- Practical command quality: Strong. This was judged from nmap, SUID search, Wireshark filters, scripting, web-security payloads, command injection, and XXE tasks.
-- Code review trap performance: Very strong. This measured whether the model found deeper issues rather than only obvious vulnerabilities.
-- Hallucination trap performance: Weak. This measured whether the model resisted fake CVEs and fictional attack names.
-- Custom cybersecurity task performance: Medium to strong. This covered XSS, SQL injection, mass assignment, SSRF, CSRF/SSRF, command injection, IDOR, and XXE questions.
+TinyLlama was included as a very small baseline model. It was fast and easy to run, but its technical reliability was weak.
 
-Decision: Rejected / not finalist
+Main observations:
 
-Reason:
-Not selected because hallucination-trap performance was weak despite reasonable normal scores.
+- produced several incomplete answers
+- made mistakes in practical command questions
+- performed poorly on hallucination traps
+- often sounded confident even when incorrect
+
+**Decision:** Rejected.  
+**Reason:** Useful as a baseline, but not reliable enough for professional cybersecurity work.
 
 ---
 
-## Llama-3.2-3B-Instruct
+### Qwen2.5-3B-Instruct
 
-Status: Tested  
-Size category: ≤7B  
-Type: General-purpose instruct model  
+**Status:** Finalist  
+**Size:** 3B  
+**Type:** General instruct  
 
-Score summary:
-- Normal score average: 3.89
-- Trap score average: 4.22
-- Overall average: 3.93
-- Factual subset average: 4.1
-- Practical subset average: 3.95
-- Code-review trap average: 5.0
-- Hallucination trap average: 3.25
+Qwen2.5-3B-Instruct performed strongly for its size. It showed good factual accuracy and good hallucination trap performance compared to many larger models.
 
-Observations:
-- Factual knowledge: Strong. This was judged from TCP, encryption, CVSS, IDS/IPS, TLS 1.3, threat terminology, and pentest methodology questions.
-- Practical command quality: Medium to strong. This was judged from nmap, SUID search, Wireshark filters, scripting, web-security payloads, command injection, and XXE tasks.
-- Code review trap performance: Very strong. This measured whether the model found deeper issues rather than only obvious vulnerabilities.
-- Hallucination trap performance: Medium. This measured whether the model resisted fake CVEs and fictional attack names.
-- Custom cybersecurity task performance: Medium to strong. This covered XSS, SQL injection, mass assignment, SSRF, CSRF/SSRF, command injection, IDOR, and XXE questions.
+Main observations:
 
-Decision: Comparison / not finalist
+- strong small-model baseline
+- good performance on factual questions
+- good trap-question performance
+- practical enough for limited hardware environments
 
-Reason:
-Good small model, but slightly weaker than Qwen2.5-3B and Phi-3.5-mini for finalist selection.
+**Decision:** Accepted as finalist.  
+**Reason:** Strong small model with good quality-to-resource balance.
 
 ---
 
-## Mistral-7B-Instruct-v0.3
+### Llama-3.2-3B-Instruct
 
-Status: Tested  
-Size category: 7B–13B  
-Type: General-purpose instruct model  
+**Status:** Rejected  
+**Size:** 3B  
+**Type:** General instruct  
 
-Score summary:
-- Normal score average: 4.14
-- Trap score average: 3.33
-- Overall average: 4.05
-- Factual subset average: 4.14
-- Practical subset average: 4.38
-- Code-review trap average: 4.8
-- Hallucination trap average: 1.5
+Llama-3.2-3B-Instruct produced acceptable answers, but it did not outperform Qwen2.5-3B-Instruct or Phi-3.5-mini-instruct.
 
-Observations:
-- Factual knowledge: Strong. This was judged from TCP, encryption, CVSS, IDS/IPS, TLS 1.3, threat terminology, and pentest methodology questions.
-- Practical command quality: Strong. This was judged from nmap, SUID search, Wireshark filters, scripting, web-security payloads, command injection, and XXE tasks.
-- Code review trap performance: Very strong. This measured whether the model found deeper issues rather than only obvious vulnerabilities.
-- Hallucination trap performance: Weak. This measured whether the model resisted fake CVEs and fictional attack names.
-- Custom cybersecurity task performance: Medium to strong. This covered XSS, SQL injection, mass assignment, SSRF, CSRF/SSRF, command injection, IDOR, and XXE questions.
+Main observations:
 
-Decision: Comparison / not finalist
+- acceptable small-model performance
+- weaker than selected small finalists
+- did not add enough comparative value
 
-Reason:
-Strong general-purpose baseline, but not selected because Mistral-Nemo and Qwen2.5-Coder gave more useful finalist coverage.
+**Decision:** Rejected.  
+**Reason:** Good enough to test, but weaker than other small finalists.
 
 ---
 
-## Mistral-Nemo-Instruct-2407
+### Phi-3.5-mini-instruct
 
-Status: Tested  
-Size category: 7B–13B  
-Type: General-purpose instruct model  
+**Status:** Finalist  
+**Size:** 3.8B  
+**Type:** General instruct  
 
-Score summary:
-- Normal score average: 4.43
-- Trap score average: 3.78
-- Overall average: 4.36
-- Factual subset average: 4.33
-- Practical subset average: 4.71
-- Code-review trap average: 5.0
-- Hallucination trap average: 2.25
+Phi-3.5-mini-instruct was one of the strongest small models. It provided a good balance between quality, speed, and hardware requirements.
 
-Observations:
-- Factual knowledge: Strong. This was judged from TCP, encryption, CVSS, IDS/IPS, TLS 1.3, threat terminology, and pentest methodology questions.
-- Practical command quality: Very strong. This was judged from nmap, SUID search, Wireshark filters, scripting, web-security payloads, command injection, and XXE tasks.
-- Code review trap performance: Very strong. This measured whether the model found deeper issues rather than only obvious vulnerabilities.
-- Hallucination trap performance: Weak to medium. This measured whether the model resisted fake CVEs and fictional attack names.
-- Custom cybersecurity task performance: Strong. This covered XSS, SQL injection, mass assignment, SSRF, CSRF/SSRF, command injection, IDOR, and XXE questions.
+Main observations:
 
-Decision: Finalist
+- strong small-model performance
+- good overall score
+- good trap handling
+- practical for local use on limited hardware
 
-Reason:
-Selected as a finalist because it had the best overall baseline score.
+**Decision:** Accepted as finalist.  
+**Reason:** Best small-model balance of performance and resource use.
 
 ---
 
-## Phi-3.5-mini-instruct
+### Phi-4-mini-instruct
 
-Status: Tested  
-Size category: ≤7B  
-Type: General-purpose instruct model  
+**Status:** Skipped  
+**Size:** 3.8B  
+**Type:** General instruct  
 
-Score summary:
-- Normal score average: 3.99
-- Trap score average: 4.22
-- Overall average: 4.01
-- Factual subset average: 4.14
-- Practical subset average: 3.79
-- Code-review trap average: 5.0
-- Hallucination trap average: 3.25
+Phi-4-mini-instruct was considered, but it failed to load correctly in the local setup during testing.
 
-Observations:
-- Factual knowledge: Strong. This was judged from TCP, encryption, CVSS, IDS/IPS, TLS 1.3, threat terminology, and pentest methodology questions.
-- Practical command quality: Medium to strong. This was judged from nmap, SUID search, Wireshark filters, scripting, web-security payloads, command injection, and XXE tasks.
-- Code review trap performance: Very strong. This measured whether the model found deeper issues rather than only obvious vulnerabilities.
-- Hallucination trap performance: Medium. This measured whether the model resisted fake CVEs and fictional attack names.
-- Custom cybersecurity task performance: Strong. This covered XSS, SQL injection, mass assignment, SSRF, CSRF/SSRF, command injection, IDOR, and XXE questions.
+Main observations:
 
-Decision: Finalist
+- model download was possible
+- local loading failed
+- not evaluated fully
 
-Reason:
-Selected as a finalist because it had the best small-model overall score and stable trap performance.
+**Decision:** Skipped.  
+**Reason:** Technical loading issue prevented a reliable evaluation.
 
 ---
 
-## Qwen2.5-3B-Instruct
+### Mistral-7B-Instruct-v0.3
 
-Status: Tested  
-Size category: ≤7B  
-Type: General-purpose instruct model  
+**Status:** Strong candidate  
+**Size:** 7B  
+**Type:** General instruct  
 
-Score summary:
-- Normal score average: 3.96
-- Trap score average: 4.22
-- Overall average: 3.99
-- Factual subset average: 4.14
-- Practical subset average: 3.83
-- Code-review trap average: 4.8
-- Hallucination trap average: 3.5
+Mistral-7B-Instruct-v0.3 performed well on normal questions and practical tasks. However, it was weaker than the final selected models in some trap categories.
 
-Observations:
-- Factual knowledge: Strong. This was judged from TCP, encryption, CVSS, IDS/IPS, TLS 1.3, threat terminology, and pentest methodology questions.
-- Practical command quality: Medium to strong. This was judged from nmap, SUID search, Wireshark filters, scripting, web-security payloads, command injection, and XXE tasks.
-- Code review trap performance: Very strong. This measured whether the model found deeper issues rather than only obvious vulnerabilities.
-- Hallucination trap performance: Medium to strong. This measured whether the model resisted fake CVEs and fictional attack names.
-- Custom cybersecurity task performance: Medium to strong. This covered XSS, SQL injection, mass assignment, SSRF, CSRF/SSRF, command injection, IDOR, and XXE questions.
+Main observations:
 
-Decision: Finalist
+- strong factual and practical answers
+- good normal score
+- weaker hallucination trap performance than some finalists
+- useful comparison model
 
-Reason:
-Selected as a finalist because it was one of the strongest small models and had good trap performance.
+**Decision:** Strong candidate, not finalist.  
+**Reason:** Good model, but Qwen2.5-Coder-7B and Mistral-Nemo provided stronger final comparison value.
 
 ---
 
-## Qwen2.5-7B-Instruct
+### Qwen2.5-7B-Instruct
 
-Status: Tested  
-Size category: 7B–13B  
-Type: General-purpose instruct model  
+**Status:** Strong candidate  
+**Size:** 7B  
+**Type:** General instruct  
 
-Score summary:
-- Normal score average: 3.99
-- Trap score average: 4.0
-- Overall average: 3.99
-- Factual subset average: 4.0
-- Practical subset average: 3.79
-- Code-review trap average: 5.0
-- Hallucination trap average: 2.75
+Qwen2.5-7B-Instruct performed well overall, but it was not selected as a finalist because Qwen2.5-Coder-7B provided stronger code/practical value.
 
-Observations:
-- Factual knowledge: Strong. This was judged from TCP, encryption, CVSS, IDS/IPS, TLS 1.3, threat terminology, and pentest methodology questions.
-- Practical command quality: Medium to strong. This was judged from nmap, SUID search, Wireshark filters, scripting, web-security payloads, command injection, and XXE tasks.
-- Code review trap performance: Very strong. This measured whether the model found deeper issues rather than only obvious vulnerabilities.
-- Hallucination trap performance: Weak to medium. This measured whether the model resisted fake CVEs and fictional attack names.
-- Custom cybersecurity task performance: Medium to strong. This covered XSS, SQL injection, mass assignment, SSRF, CSRF/SSRF, command injection, IDOR, and XXE questions.
+Main observations:
 
-Decision: Comparison / not finalist
+- good general performance
+- good trap score
+- stable output quality
+- less distinctive than Qwen2.5-Coder-7B
 
-Reason:
-Good model, but not selected because Qwen2.5-Coder provided stronger practical/code value.
+**Decision:** Strong candidate, not finalist.  
+**Reason:** Good model, but the coder version was more useful for cybersecurity tasks.
 
 ---
 
-## Qwen2.5-Coder-7B-Instruct
+### Qwen2.5-Coder-7B-Instruct
 
-Status: Tested  
-Size category: 7B–13B  
-Type: Code-focused instruct model  
+**Status:** Finalist  
+**Size:** 7B  
+**Type:** Code-focused instruct  
 
-Score summary:
-- Normal score average: 4.13
-- Trap score average: 3.67
-- Overall average: 4.08
-- Factual subset average: 4.05
-- Practical subset average: 4.54
-- Code-review trap average: 5.0
-- Hallucination trap average: 2.0
+Qwen2.5-Coder-7B-Instruct was selected because it performed strongly on practical tasks, code-related questions, command generation, and code review traps.
 
-Observations:
-- Factual knowledge: Strong. This was judged from TCP, encryption, CVSS, IDS/IPS, TLS 1.3, threat terminology, and pentest methodology questions.
-- Practical command quality: Very strong. This was judged from nmap, SUID search, Wireshark filters, scripting, web-security payloads, command injection, and XXE tasks.
-- Code review trap performance: Very strong. This measured whether the model found deeper issues rather than only obvious vulnerabilities.
-- Hallucination trap performance: Weak to medium. This measured whether the model resisted fake CVEs and fictional attack names.
-- Custom cybersecurity task performance: Medium to strong. This covered XSS, SQL injection, mass assignment, SSRF, CSRF/SSRF, command injection, IDOR, and XXE questions.
+Main observations:
 
-Decision: Finalist
+- strong command and script quality
+- good code review performance
+- good practical cybersecurity usefulness
+- useful comparison against cybersecurity fine-tunes
 
-Reason:
-Selected as a finalist because it was one of the strongest models for code review and practical command tasks.
+**Decision:** Accepted as finalist.  
+**Reason:** Best practical/code-oriented model.
 
 ---
 
-## SenecaLLM_x_Qwen2.5-7B-CyberSecurity
+### WhiteRabbitNeo-2.5-Qwen-2.5-Coder-7B
 
-Status: Tested  
-Size category: 7B–13B  
-Type: Cybersecurity fine-tune  
+**Status:** Strong candidate  
+**Size:** 7B  
+**Type:** Cybersecurity / coder  
 
-Score summary:
-- Normal score average: 4.04
-- Trap score average: 3.67
-- Overall average: 4.0
-- Factual subset average: 4.0
-- Practical subset average: 4.5
-- Code-review trap average: 4.8
-- Hallucination trap average: 2.25
+WhiteRabbitNeo was included as a cybersecurity-oriented coder model. It performed well enough to be useful for comparison, but it did not clearly outperform Qwen2.5-Coder-7B.
 
-Observations:
-- Factual knowledge: Strong. This was judged from TCP, encryption, CVSS, IDS/IPS, TLS 1.3, threat terminology, and pentest methodology questions.
-- Practical command quality: Very strong. This was judged from nmap, SUID search, Wireshark filters, scripting, web-security payloads, command injection, and XXE tasks.
-- Code review trap performance: Very strong. This measured whether the model found deeper issues rather than only obvious vulnerabilities.
-- Hallucination trap performance: Weak to medium. This measured whether the model resisted fake CVEs and fictional attack names.
-- Custom cybersecurity task performance: Strong. This covered XSS, SQL injection, mass assignment, SSRF, CSRF/SSRF, command injection, IDOR, and XXE questions.
+Main observations:
 
-Decision: Comparison / not finalist
+- good cybersecurity relevance
+- good practical answers
+- did not clearly beat the base coder model
+- some hallucination/trap weaknesses remained
 
-Reason:
-Good cybersecurity-focused comparison, but not selected over Qwen2.5-Coder and Mistral-Nemo.
+**Decision:** Strong candidate, not finalist.  
+**Reason:** Useful cybersecurity comparison model, but not the strongest final choice.
 
 ---
 
-## TinyLlama-1.1B-Chat-v1.0
+### Lily-Cybersecurity-7B-v0.2
 
-Status: Tested  
-Size category: ≤7B  
-Type: General-purpose chat baseline  
+**Status:** Rejected  
+**Size:** 7B  
+**Type:** Cybersecurity fine-tune  
 
-Score summary:
-- Normal score average: 3.12
-- Trap score average: 1.89
-- Overall average: 2.97
-- Factual subset average: 3.48
-- Practical subset average: 2.5
-- Code-review trap average: 2.6
-- Hallucination trap average: 1.0
+Lily-Cybersecurity was included to test whether cybersecurity fine-tuning improves performance. It answered many cybersecurity questions, but its trap performance and overall reliability were weaker than stronger general-purpose and coder models.
 
-Observations:
-- Factual knowledge: Medium. This was judged from TCP, encryption, CVSS, IDS/IPS, TLS 1.3, threat terminology, and pentest methodology questions.
-- Practical command quality: Weak to medium. This was judged from nmap, SUID search, Wireshark filters, scripting, web-security payloads, command injection, and XXE tasks.
-- Code review trap performance: Weak to medium. This measured whether the model found deeper issues rather than only obvious vulnerabilities.
-- Hallucination trap performance: Weak. This measured whether the model resisted fake CVEs and fictional attack names.
-- Custom cybersecurity task performance: Weak to medium. This covered XSS, SQL injection, mass assignment, SSRF, CSRF/SSRF, command injection, IDOR, and XXE questions.
+Main observations:
 
-Decision: Rejected baseline
+- cybersecurity-focused model
+- acceptable normal answers
+- weaker hallucination trap performance
+- did not outperform stronger general-purpose models
 
-Reason:
-Useful as a weak baseline, but not reliable enough for professional cybersecurity work.
+**Decision:** Rejected.  
+**Reason:** Cybersecurity label did not translate into better overall performance.
 
 ---
 
-## WhiteRabbitNeo-2.5-Qwen-2.5-Coder-7B
+### SenecaLLM Qwen2.5-7B CyberSecurity
 
-Status: Tested  
-Size category: 7B–13B  
-Type: Coder / cybersecurity-oriented  
+**Status:** Strong candidate  
+**Size:** 7B  
+**Type:** Cybersecurity fine-tune  
 
-Score summary:
-- Normal score average: 4.1
-- Trap score average: 3.56
-- Overall average: 4.04
-- Factual subset average: 3.95
-- Practical subset average: 4.17
-- Code-review trap average: 4.8
-- Hallucination trap average: 2.0
+SenecaLLM performed better than some cybersecurity-focused alternatives and was useful for comparison. However, it was not selected as a finalist because other models had stronger overall or practical performance.
 
-Observations:
-- Factual knowledge: Medium to strong. This was judged from TCP, encryption, CVSS, IDS/IPS, TLS 1.3, threat terminology, and pentest methodology questions.
-- Practical command quality: Strong. This was judged from nmap, SUID search, Wireshark filters, scripting, web-security payloads, command injection, and XXE tasks.
-- Code review trap performance: Very strong. This measured whether the model found deeper issues rather than only obvious vulnerabilities.
-- Hallucination trap performance: Weak to medium. This measured whether the model resisted fake CVEs and fictional attack names.
-- Custom cybersecurity task performance: Medium to strong. This covered XSS, SQL injection, mass assignment, SSRF, CSRF/SSRF, command injection, IDOR, and XXE questions.
+Main observations:
 
-Decision: Comparison / not finalist
+- good cybersecurity-focused comparison model
+- acceptable normal and trap performance
+- did not clearly outperform Qwen2.5-Coder or Mistral-Nemo
 
-Reason:
-Useful cybersecurity-oriented comparison, but not selected as a final model because it did not clearly outperform the strongest coder/general models.
+**Decision:** Strong candidate, not finalist.  
+**Reason:** Useful for analysis, but not the best model in its category.
 
 ---
 
-## PHI-4-MINI-INSTRUCT
+### Gemma-2-9B-it
 
-Status: Skipped  
-Size category: ≤7B  
-Type: General-purpose instruct model  
+**Status:** Rejected  
+**Size:** 9B  
+**Type:** General instruct  
 
-Observations:
-- The model was downloaded, but it failed to load with the current `llama-cpp-python` CUDA backend.
-- It was not evaluated, so no answer file or score table was produced.
+Gemma-2-9B-it performed acceptably, but it did not provide enough advantage over smaller or stronger models.
 
-Decision: Skipped
+Main observations:
 
-Reason:
-The failure appears to be an inference-backend compatibility issue, not a model-quality result. The model was excluded from finalist selection.
+- reasonable general performance
+- good trap average
+- not the strongest practical model
+- less useful than Mistral-Nemo or Qwen2.5-Coder
+
+**Decision:** Rejected.  
+**Reason:** Good but not competitive enough for finalist selection.
 
 ---
 
-## Screening Summary
+### Mistral-Nemo-Instruct-2407
 
-The screening showed that model size alone did not determine quality. Some small models, especially Qwen2.5-3B and Phi-3.5-mini, performed competitively against larger models. TinyLlama was useful as a weak baseline but was rejected because it failed many practical and hallucination-trap questions.
+**Status:** Finalist  
+**Size:** 12B  
+**Type:** General instruct  
 
-The strongest overall baseline result came from Mistral-Nemo-Instruct-2407. Qwen2.5-Coder-7B-Instruct was the strongest practical/code-oriented finalist. Cybersecurity-focused models were useful for comparison, but they did not automatically outperform strong general-purpose or coder models. This supports the assignment warning that a cybersecurity label or willingness to answer is not enough; accuracy and hallucination resistance must be tested.
+Mistral-Nemo was the best overall model in the baseline evaluation. It scored highest overall and performed well across factual, practical, and custom cybersecurity questions.
+
+Main observations:
+
+- best overall score
+- strong normal-answer performance
+- good practical usefulness
+- higher hardware cost than smaller models
+
+**Decision:** Accepted as finalist.  
+**Reason:** Best overall model in the evaluation.
+
+---
+
+## Screening Conclusion
+
+The screening showed that cybersecurity-specific fine-tuning did not automatically produce the best model.
+
+The strongest models were general-purpose or coder models:
+
+- Mistral-Nemo-Instruct-2407
+- Qwen2.5-Coder-7B-Instruct
+- Phi-3.5-mini-instruct
+- Qwen2.5-3B-Instruct
+
+The most important screening finding was that model branding is not enough. A model with "cybersecurity" in the name can still hallucinate, miss deeper vulnerabilities, or produce weaker practical output than a strong general-purpose or coder model.

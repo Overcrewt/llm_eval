@@ -2,12 +2,12 @@
 
 ## Goal
 
-The goal of the parameter experiment was to test how generation temperature affects cybersecurity answer quality. The baseline evaluation used `temperature = 0`. The finalists were then tested again at:
+We used the parameter experiment to test how generation temperature affects cybersecurity answer quality. The baseline used `temperature = 0`, and the finalists were tested again at:
 
 - `temperature = 0.5`
 - `temperature = 1.0`
 
-The evaluator settings were kept fixed for all evaluations. Only the tested model generation temperature was changed.
+Evaluator settings stayed fixed for all evaluations. Only the tested model generation temperature changed.
 
 ## Finalist models tested
 
@@ -39,11 +39,11 @@ The evaluator settings were kept fixed for all evaluations. Only the tested mode
 
 ### Qwen2.5-3B-Instruct
 
-Qwen2.5-3B was relatively strong at all temperatures. At `temperature = 0.5`, hallucination-trap performance improved compared with baseline, but practical command quality slightly decreased. At `temperature = 1.0`, the overall score increased, but hallucination resistance dropped. This means higher temperature produced more variable results.
+Qwen2.5-3B was relatively strong at all temperatures. At `temperature = 0.5`, hallucination-trap performance improved compared with baseline, but practical command quality slightly decreased. At `temperature = 1.0`, the overall score increased, but hallucination resistance dropped. Higher temperature produced more variable results.
 
 ### Phi-3.5-mini-instruct
 
-Phi-3.5-mini was the most stable small model. `temperature = 0.5` slightly improved the overall score and practical score. `temperature = 1.0` reduced the overall score and slightly weakened trap performance. This suggests that a moderate temperature can be acceptable for this model, but high temperature is not clearly beneficial.
+Phi-3.5-mini was the most stable small model. `temperature = 0.5` slightly improved the overall score and practical score. `temperature = 1.0` reduced the overall score and slightly weakened trap performance. For this model, moderate temperature was acceptable, but high temperature was not clearly beneficial.
 
 ### Qwen2.5-Coder-7B-Instruct
 
@@ -51,7 +51,7 @@ Qwen2.5-Coder was strong on code-review and practical tasks across temperatures.
 
 ### Mistral-Nemo-Instruct-2407
 
-Mistral-Nemo had the best baseline result at `temperature = 0`. Its score decreased at `temperature = 0.5` and decreased further at `temperature = 1.0`. The hallucination-trap score also declined as temperature increased. This was the clearest case where higher temperature made the model less reliable.
+Mistral-Nemo had the best baseline result at `temperature = 0`. Its score decreased at `temperature = 0.5` and decreased further at `temperature = 1.0`. The hallucination-trap score also declined as temperature increased. This was the clearest case where higher temperature reduced reliability.
 
 ## Conclusion
 

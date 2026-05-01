@@ -1,54 +1,115 @@
 # Project File Check
 
-## Summary
+## Required Deliverables
 
-This check was made from the uploaded final review archive.
+### 1. Main Report
 
-## Required project files
+Main report file:
 
-| File / Folder | Status | Notes |
-|---|---|---|
-| `report.md` | Present | Contains baseline evaluations and temperature experiment evaluations. |
-| `questions.json` | Present | Contains 32 evaluation questions. |
-| `answers.json` | Present | Contains 22 reference answers for the core question set. |
-| `ask_llm.py` | Present | Uses a shared `TEMPERATURE` variable and CUDA offloading through `n_gpu_layers=-1`. |
-| `evaluate_llm.py` | Present | Uses the same evaluator settings for all runs. |
-| `results/answers_*.json` | Present | 20 answer files found. All contain 32 answers. |
-| `data/model_score_summary.csv` | Present | Baseline score summary. |
-| `data/model_score_summary_extended.csv` | Present | Extended baseline category summary. |
-| `models_candidates.md` | Replaced by new version | Uploaded version had only three model rows. Replacement file contains the full candidate table. |
-| `screening_log.md` | Replaced by new version | Replacement file contains complete screening decisions. |
-| `final_report_baseline_analysis_draft.md` | Replaced by new version | Replacement file contains the final report text with temperature experiments. |
-| `temperature_experiments.md` | New file | Added summary and interpretation of temperature experiments. |
+- `report.md`
 
-## Raw answer file validation
+The report covers:
 
-| File | Answers | Status |
-|---|---:|---|
-| `answers_gemma_2_9b_it_temp0.json` | 32 | OK |
-| `answers_lily_cybersecurity_7b_temp0.json` | 32 | OK |
-| `answers_llama_3_2_3b_temp0.json` | 32 | OK |
-| `answers_mistral_7b_temp0.json` | 32 | OK |
-| `answers_mistral_nemo_12b_temp0.json` | 32 | OK |
-| `answers_mistral_nemo_12b_temp05.json` | 32 | OK |
-| `answers_mistral_nemo_12b_temp10.json` | 32 | OK |
-| `answers_phi_3_5_mini_temp0.json` | 32 | OK |
-| `answers_phi_3_5_mini_temp05.json` | 32 | OK |
-| `answers_phi_3_5_mini_temp10.json` | 32 | OK |
-| `answers_qwen_2_5_3b_temp0.json` | 32 | OK |
-| `answers_qwen_2_5_3b_temp05.json` | 32 | OK |
-| `answers_qwen_2_5_3b_temp10.json` | 32 | OK |
-| `answers_qwen_2_5_7b_temp0.json` | 32 | OK |
-| `answers_qwen_2_5_coder_7b_temp0.json` | 32 | OK |
-| `answers_qwen_2_5_coder_7b_temp05.json` | 32 | OK |
-| `answers_qwen_2_5_coder_7b_temp10.json` | 32 | OK |
-| `answers_seneca_qwen_2_5_7b_cybersecurity_temp0.json` | 32 | OK |
-| `answers_tinyllama_temp0.json` | 32 | OK |
-| `answers_whiterabbitneo_2_5_qwen_coder_7b_temp0.json` | 32 | OK |
+- goal of the study
+- models overview
+- experimental setup
+- prompt set
+- evaluation criteria
+- quantitative results
+- qualitative results
+- temperature experiments
+- comparison by category
+- impact of model size
+- limitations
+- conclusion
+- discussion
 
-## Notes
+### 2. Python Code
 
-- `Phi-4-mini-instruct` was attempted but not included as an evaluated model because it failed to load with the current CUDA backend.
-- `report.md` is large and can be kept as the automated scoring appendix.
-- The final report should not paste the full `report.md`; it should summarize the results and refer to raw files and `report.md`.
-- Before final commit, keep `ask_llm.py` at `TEMPERATURE = 0` so the project defaults back to the baseline setting.
+The main pipeline files are:
+
+- `ask_llm.py`
+- `evaluate_llm.py`
+- `summarize_scores.py`
+
+These files provide the evaluation workflow:
+
+1. load a local GGUF model
+2. ask all questions
+3. save model responses
+4. evaluate responses against reference answers
+5. summarize scores
+
+### 3. Raw Data
+
+Raw model outputs are stored in:
+
+- `results/answers_*.json`
+
+Score summaries are stored in:
+
+- `data/model_score_summary.csv`
+- `data/model_score_summary_extended.csv`
+- `data/model_score_summary_final.csv`
+- `data/temperature_score_summary.csv`
+
+### 4. Supporting Files
+
+Supporting project files:
+
+- `questions.json`
+- `answers.json`
+- `custom_questions_report.md`
+- `models_candidates.md`
+- `screening_log.md`
+- `temperature_experiments.md`
+- `requirements.txt`
+- `README.md`
+
+## Repository Cleanliness Check
+
+The repository should NOT include:
+
+- `venv/`
+- `.cache/`
+- `__pycache__/`
+- `.gguf` model files
+- Hugging Face cache
+- CUDA installer files
+- temporary backup folders
+- temporary unfinished `answers_llm.json`
+
+## Final Check Commands
+
+Before submission, run:
+
+```powershell
+git status
+```
+
+Check that no large model files are included:
+
+```powershell
+Get-ChildItem -Recurse -Include *.gguf | Select-Object FullName
+```
+
+Check that no virtual environment is included:
+
+```powershell
+Test-Path venv
+```
+
+Expected result:
+
+```text
+No .gguf files listed
+Test-Path venv = False
+```
+
+## Submission Package
+
+Recommended submission:
+
+- `report.md`
+- GitHub repository link
+- presentation file if required separately
