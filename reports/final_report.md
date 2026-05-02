@@ -1,4 +1,4 @@
-﻿# LLM Evaluation in Cybersecurity
+# LLM Evaluation in Cybersecurity
 
 **Student names:** Danila Karotam, Dmitri Plotnikov 
 **Course:** Advanced Python for Cybersecurity
@@ -374,3 +374,32 @@ If we continued this project, the next steps would be:
 - test top-p and system prompt variations
 - add more real-world incident response and malware analysis questions
 - compare results against commercial models only as a reference, without using them in the required local evaluation
+
+---
+
+## 14. Bonus: Evaluating a 35B Uncensored Model
+
+As an additional experiment, we wanted to see how a significantly larger, uncensored model would perform compared to our finalists. We tested **Qwen3.6-35B-Uncensored**.
+
+Because a 35B parameter model cannot run efficiently on the consumer laptop used for the main study, this test was conducted in the cloud using a **DigitalOcean GPU Droplet equipped with an RTX 6000 Ada**.
+
+### Quantitative Results
+
+| Model | Normal Avg | Trap Avg | Overall Avg |
+|---|---:|---:|---:|
+| Mistral-Nemo-Instruct-2407 (Top Finalist) | 4.43 | 3.78 | 4.36 |
+| **Qwen3.6-35B-Uncensored** | **4.38** | **3.89** | **4.32** |
+| Qwen2.5-Coder-7B-Instruct (Top 7B) | 4.13 | 3.67 | 4.08 |
+
+The 35B model achieved an overall average of 4.32. This places it near the top of our leaderboard, performing very similarly to the 12B Mistral-Nemo model. Interestingly, it scored slightly better on trap questions (3.89 vs 3.78) but slightly lower on normal questions (4.38 vs 4.43) compared to Mistral-Nemo.
+
+### Qualitative Findings
+
+A review of the detailed evaluation report revealed several interesting traits about this large, uncensored model:
+
+- **Strong Practical Capabilities:** On code review traps and standard practical questions, the model performed exceptionally well, scoring mostly 5s. It easily identified multiple vulnerability levels in code snippets and provided clear, usable payloads and defensive code.
+- **The "Uncensored" Double-Edged Sword:** While its uncensored nature meant it readily answered offensive security questions, it also proved susceptible to hallucination traps. For example, it scored a 1 on a question about a fictional "GhostProtocol" attack, confidently fabricating a detailed explanation and defense strategy. It also partially failed other fake CVE traps by inventing details while noticing some inconsistencies. 
+
+### Conclusion on the 35B Model
+
+The 35B parameter Qwen3.6 model is highly capable and matches the top models in our study. However, this test reinforces our earlier conclusion: **model size and "uncensored" status do not eliminate hallucination risks**. Even a massive 35B model can confidently invent fake attack techniques. For professional cybersecurity work, its outputs must still be rigorously verified.
